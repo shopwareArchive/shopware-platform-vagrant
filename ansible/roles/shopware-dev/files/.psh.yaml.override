@@ -1,0 +1,8 @@
+const:
+  APP_ENV: "dev"
+  APP_URL: "http://192.168.33.10"
+  DB_HOST: "localhost"
+  DB_PORT: "3306"
+  DB_NAME: "shopware"
+  DB_USER: "app"
+  DB_PASSWORD: "app"

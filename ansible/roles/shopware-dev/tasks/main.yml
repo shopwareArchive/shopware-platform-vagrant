@@ -1,0 +1,96 @@
+---
+- name: clone shopware-dev git repo
+  git:
+    repo: http://github.com/shopware/development.git
+    dest: /home/vagrant/shopware-dev
+    clone: yes
+
+- name: create mysql database 'shopware'
+  become: yes
+  mysql_db:
+    name: shopware
+    state: present
+  
+- name: create mysql database 'shopware_test'  
+  become: yes
+  mysql_db:
+    name: shopware_test
+    state: present
+
+- name: create database user 'app' with privileges on shopware db
+  become: yes
+  mysql_user:
+    name: app
+    password: app
+    priv: 'shopware.*:ALL/shopware_test.*:ALL'
+    state: present
+
+- name: add vagrant user to www-data group
+  user:
+    name: vagrant
+    groups: www-data
+    append: yes
+  become: yes
+
+- name: create symlink for shopware-dev directory
+  become: yes
+  file:
+    src: "/home/vagrant/shopware-dev"
+    dest: "/var/www/shopware.dev"
+    state: link
+
+- name: copy apache config file for shopware-dev
+  become: yes
+  copy:
+    src: "shopware.dev.conf"
+    dest: "/etc/apache2/sites-available/shopware.dev.conf"
+
+- name: copy .psh.yaml.override file for shopware install
+  copy:
+    src: ".psh.yaml.override"
+    dest: "/home/vagrant/shopware-dev/.psh.yaml.override"
+
+- name: enable site shopware.dev.conf
+  command: a2ensite shopware.dev.conf
+  become: yes
+
+- name: disable 000-default.conf
+  command: a2dissite 000-default.conf
+  become: yes
+
+- name: execute psh.phar install
+  command: "./psh.phar install"
+  args:
+    chdir: /home/vagrant/shopware-dev
+
+- name: change group to www-data for shopware-dev directory
+  become: yes
+  file:
+    path: /home/vagrant/shopware-dev
+    group: www-data
+    recurse: yes
+
+- name: chmod g+s on all directories in shopware-dev 
+  file:
+    path: /home/vagrant/shopware-dev
+    mode: g+s
+    recurse: yes
+    state: directory
+
+- name: chmod g+w on var, public, media and thumbnail folders in shopware-dev
+  file:
+    path: /home/vagrant/shopware-dev/{{ item }}
+    mode: g+w
+    recurse: yes
+  with_items:
+    - var/media
+    - var/thumbnail
+    - public/media
+    - public/thumbnail
+
+- name: enable mod_rewrite
+  become: yes
+  apache2_module:
+    name: rewrite
+    state: present
+  notify: restart-apache

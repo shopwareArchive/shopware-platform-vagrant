@@ -1,0 +1,6 @@
+---
+- name: apply configuration
+  hosts: all
+  roles:
+    - common
+    - shopware-dev

@@ -1,0 +1,16 @@
+---
+- name: start docker containers via psh
+  command: /home/vagrant/shopware-dev/psh.phar docker:start
+
+- name: change owner on .composer directory
+  file:
+    path: /home/vagrant/.composer
+    owner: vagrant
+    group: vagrant
+    mode: 0755
+
+- name: start bash inside app-server container
+  command: docker exec shopwaredev_app_server_1 bash
+
+- name: init shopware-dev environment inside container
+  command: docker exec shopwaredev_app_server_1 ./psh.phar init
