@@ -17,12 +17,18 @@
     name: shopware_test
     state: present
 
+- name: create mysql database 'shopware_e2e'  
+  become: yes
+  mysql_db:
+    name: shopware_e2e
+    state: present
+
 - name: create database user 'app' with privileges on shopware db
   become: yes
   mysql_user:
     name: app
     password: app
-    priv: 'shopware.*:ALL/shopware_test.*:ALL'
+    priv: 'shopware.*:ALL/shopware_test.*:ALL/shopware_e2e.*:ALL'
     state: present
 
 - name: add vagrant user to www-data group
