@@ -31,6 +31,20 @@
     priv: 'shopware.*:ALL/shopware_test.*:ALL/shopware_e2e.*:ALL'
     state: present
 
+- name: set group_concat_max_len setting for mysql db (for indexing)
+  become: yes
+  blockinfile:
+    dest: /etc/mysql/mysql.cnf
+    block: |
+      [mysqld]
+      group_concat_max_len=320000
+
+- name: restart mysql service
+  service:
+    name: mysql
+    state: restarted
+  become: yes
+
 - name: add vagrant user to www-data group
   user:
     name: vagrant
@@ -62,6 +76,10 @@
 
 - name: disable 000-default.conf
   command: a2dissite 000-default.conf
+  become: yes
+
+- name: update npm to use npm clean-install command with "./psh.phar install"
+  command: "npm install -g npm"
   become: yes
 
 - name: execute psh.phar install
