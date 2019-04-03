@@ -49,6 +49,7 @@
     - php-xml 
     - php-zip 
     - php-json
+    - php-curl
 
 - name: add vagrant user to docker group
   user:
