@@ -25,6 +25,8 @@ The storefront will be available at [http://192.168.33.10/](http://192.168.33.10
 
 The administration will be available at [http://192.168.33.10/admin](http://192.168.33.10/admin)
 
+Credentials for ssh access are vagrant/vagrant
+
 ---
 
 ## Shopware Dev setup
