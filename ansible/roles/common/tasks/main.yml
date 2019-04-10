@@ -16,40 +16,15 @@
 
 - name: install packages required for shopware.dev setup
   become: yes
-  apt: pkg={{ item }} state=latest
-  with_items:
-    - sudo
-    - git
-    - apt-transport-https 
-    - ca-certificates 
-    - curl 
-    - software-properties-common
-    - php
-    - libapache2-mod-php
-    - php-cli
-    - mysql-server
-    - python-mysqldb
-    - composer
-    - nodejs
-    - npm
-    - chromium-browser
-    - default-jre-headless
-    - docker.io
-    - docker-compose
+  apt: 
+    pkg: ['sudo', 'git', 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'php', 'libapache2-mod-php', 'php-cli', 'mysql-server', 'python-mysqldb', 'composer', 'nodejs', 'npm', 'chromium-browser', 'default-jre-headless', 'docker.io', 'docker-compose']
+    state: latest
 
 - name: install php extensions
   become: yes
-  apt: pkg={{ item }} state=latest
-  with_items:
-    - php-gd 
-    - php-intl 
-    - php-iconv 
-    - php-mbstring 
-    - php-mysql 
-    - php-xml 
-    - php-zip 
-    - php-json
-    - php-curl
+  apt: 
+    pkg: ['php-gd', 'php-intl', 'php-iconv', 'php-mbstring', 'php-mysql', 'php-xml', 'php-zip', 'php-json', 'php-curl']
+    state: latest
 
 - name: add vagrant user to docker group
   user:

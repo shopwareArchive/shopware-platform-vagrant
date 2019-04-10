@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
         v.customize ["modifyvm", :id, "--ioapic", "on"]
     end
     
-    config.vm.provision "ansible" do |ansible|
+    config.vm.provision "ansible_local" do |ansible|
         ansible.compatibility_mode = "2.0"
         ansible.playbook = "ansible/playbook.yml"
     end
