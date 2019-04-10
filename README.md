@@ -11,7 +11,7 @@ You need VirtualBox and Vagrant (min. Version 2.0) installed locally on your mac
 Clone this repository to your local machine
     
     $ git clone git@github.com:shopwareLabs/shopware-platform-vagrant.git
-    $ cd vshopware-platform-vagrant
+    $ cd shopware-platform-vagrant
 
 Boot up the virtual machine using Vagrant
     
@@ -29,7 +29,7 @@ The administration will be available at [http://192.168.33.10/admin](http://192.
 
 ## Shopware Dev setup
 
-For more info on the Shopware Dev Setup visit [Shopware Dev Setup - Getting started](https://docs.shopware.com/en/shopware-platform-en/getting-started/dev-setup?category=shopware-platform-en/getting-started)
+For more info on the Shopware dev setup visit [our docs](https://docs.shopware.com/en/shopware-platform-dev-en/getting-started/installation-guide)
 
 ---
 
