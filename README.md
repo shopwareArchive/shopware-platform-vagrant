@@ -10,8 +10,8 @@ You need VirtualBox and Vagrant (min. Version 2.0) installed locally on your mac
 
 Clone this repository to your local machine
     
-    $ git clone https://stash.shopware.com/scm/tool/vagrant-dev-box-next.git
-    $ cd vagrant-dev-box-next
+    $ git clone git@github.com:shopwareLabs/shopware-platform-vagrant.git
+    $ cd vshopware-platform-vagrant
 
 Boot up the virtual machine using Vagrant
     
