@@ -25,7 +25,12 @@ The storefront will be available at [http://192.168.33.10/](http://192.168.33.10
 
 The administration will be available at [http://192.168.33.10/admin](http://192.168.33.10/admin).
 
-Credentials for ssh access are `vagrant/vagrant` and you can connect via `vagrant ssh` or `ssh -p 2222 vagrant@127.0.0.1` with use of credentials.
+Credentials for ssh access are `vagrant/vagrant`. 
+
+You connect via `vagrant ssh` or use credentials and ssh via port 2222 with the following command:
+
+    $ ssh -p 2222 vagrant@127.0.0.1 
+
 
 ---
 
