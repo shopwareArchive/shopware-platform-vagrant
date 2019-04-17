@@ -21,13 +21,11 @@ The first boot may take a while due to box download and ansible provisioning. Fe
 
 After the process completes your virtual machine will be up an running with your development environment ready to use. 
 
-The storefront will be available at [http://192.168.33.10/](http://192.168.33.10/)
+The storefront will be available at [http://192.168.33.10/](http://192.168.33.10/).
 
-The administration will be available at [http://192.168.33.10/admin](http://192.168.33.10/admin)
+The administration will be available at [http://192.168.33.10/admin](http://192.168.33.10/admin).
 
-Credentials for ssh access are vagrant/vagrant 
-
-You can connect via `vagrant ssh` or `ssh -p 2222 vagrant@127.0.0.1` 
+Credentials for ssh access are `vagrant/vagrant` and you can connect via `vagrant ssh` or `ssh -p 2222 vagrant@127.0.0.1` with use of credentials.
 
 ---
 
