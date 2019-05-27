@@ -6,3 +6,8 @@ const:
   DB_NAME: "shopware"
   DB_USER: "app"
   DB_PASSWORD: "app"
+
+environments:
+  administration:
+    dynamic:
+      HOST: echo "192.168.33.10"
