@@ -1,6 +1,15 @@
 Shopware Development build with Vagrant
 =======================================
 
+## Table of contents
+1. [Vagrant VM](#vagrant-vm)
+2. [Installation](#installation)
+3. [Usage](#usage)
+4. [Shopware Dev setup](#shopware-dev-setup)
+5. [Useful vagrant commands](#useful-vagrant-commands)
+6. [Connecting your IDE](#connecting-your-ide)
+
+
 ## Vagrant VM
 If using docker is not an option for you, vagrant is another great technology to quickly get a local Shopware up and running.
 
