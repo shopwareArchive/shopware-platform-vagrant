@@ -5,6 +5,12 @@
     dest: /home/vagrant/shopware-dev
     clone: yes
 
+- name: clone shopware platform git repo
+  git:
+    repo: http://github.com/shopware/platform.git
+    dest: /home/vagrant/shopware-dev/platform
+    clone: yes
+
 - name: create mysql database 'shopware'
   become: yes
   mysql_db:
@@ -45,13 +51,6 @@
     state: restarted
   become: yes
 
-- name: add vagrant user to www-data group
-  user:
-    name: vagrant
-    groups: www-data
-    append: yes
-  become: yes
-
 - name: create symlink for shopware-dev directory
   become: yes
   file:
@@ -78,10 +77,6 @@
   command: a2dissite 000-default.conf
   become: yes
 
-- name: update npm to use npm clean-install command with "./psh.phar install"
-  command: "npm install -g npm"
-  become: yes
-
 - name: execute psh.phar install
   command: "./psh.phar install"
   args:
@@ -93,24 +88,6 @@
     path: /home/vagrant/shopware-dev
     group: www-data
     recurse: yes
-
-- name: chmod g+s on all directories in shopware-dev 
-  file:
-    path: /home/vagrant/shopware-dev
-    mode: g+s
-    recurse: yes
-    state: directory
-
-- name: chmod g+w on var, public, media and thumbnail folders in shopware-dev
-  file:
-    path: /home/vagrant/shopware-dev/{{ item }}
-    mode: g+w
-    recurse: yes
-  with_items:
-    - var/media
-    - var/thumbnail
-    - public/media
-    - public/thumbnail
 
 - name: enable mod_rewrite
   become: yes

@@ -14,10 +14,21 @@
   apt:
     upgrade: full
 
+- name: install nodejs apt key
+  become: yes
+  apt_key: 
+    url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+
+- name: add nodejs apt repo
+  become: yes
+  apt_repository: 
+    repo: 'deb https://deb.nodesource.com/node_12.x {{ ansible_distribution_release }} main' 
+    update_cache: yes
+
 - name: install packages required for shopware.dev setup
   become: yes
   apt: 
-    pkg: ['sudo', 'git', 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'php', 'libapache2-mod-php', 'php-cli', 'mysql-server', 'python-mysqldb', 'composer', 'nodejs', 'npm', 'chromium-browser', 'default-jre-headless', 'docker.io', 'docker-compose']
+    pkg: ['sudo', 'git', 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'php', 'libapache2-mod-php', 'php-cli', 'mysql-server', 'python-mysqldb', 'composer', 'nodejs', 'chromium-browser', 'default-jre-headless', 'docker.io', 'docker-compose']
     state: latest
 
 - name: install php extensions
@@ -30,6 +41,13 @@
   user:
     name: vagrant
     groups: docker
+    append: yes
+  become: yes
+
+- name: add vagrant user to www-data group
+  user:
+    name: vagrant
+    groups: www-data
     append: yes
   become: yes
 
