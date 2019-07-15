@@ -50,7 +50,7 @@ The administration will be available at [http://192.168.33.10/admin](http://192.
 
 Credentials for ssh access are `vagrant/vagrant`. 
 
-You connect via `vagrant ssh` or use credentials and ssh via port 2222 with the following command:
+You connect via `vagrant ssh` or use credentials and ssh with the following command (make sure ssh known_hosts is correct):
 
     $ ssh vagrant@192.168.33.10
 
