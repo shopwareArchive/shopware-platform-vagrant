@@ -52,7 +52,7 @@ Credentials for ssh access are `vagrant/vagrant`.
 
 You connect via `vagrant ssh` or use credentials and ssh via port 2222 with the following command:
 
-    $ ssh -p 2222 vagrant@127.0.0.1 
+    $ ssh vagrant@192.168.33.10
 
 
 ---
