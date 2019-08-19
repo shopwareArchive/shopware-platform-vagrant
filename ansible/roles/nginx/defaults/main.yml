@@ -1,0 +1,5 @@
+---
+proxy_enabled: no
+proxy_ssl: no
+proxy_hostname: shopware.dev
+proxy_upstream: http://localhost:81/

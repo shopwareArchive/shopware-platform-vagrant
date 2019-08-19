@@ -1,6 +1,6 @@
 const:
   APP_ENV: "dev"
-  APP_URL: "http://192.168.33.10"
+  APP_URL: "{{ shop_protocol }}://{{ shop_host }}"
   DB_HOST: "localhost"
   DB_PORT: "3306"
   DB_NAME: "shopware"
@@ -10,4 +10,4 @@ const:
 environments:
   administration:
     dynamic:
-      HOST: echo "192.168.33.10"
+      HOST: echo "{{ shop_host }}"

@@ -1,0 +1,44 @@
+---
+- name: install pip
+  become: true
+  apt:
+    name: python-pip
+    state: present
+
+- name: install openssl
+  become: yes
+  pip:
+    name: pyopenssl
+
+- name: create certs directory
+  become: yes
+  file:
+    path: "/etc/ssl/{{ proxy_hostname }}"
+    state: directory
+
+- name: create private key
+  become: yes
+  openssl_privatekey:
+    path: "/etc/ssl/{{ proxy_hostname }}/key.pem"
+
+- name: create signing request
+  become: yes
+  openssl_csr:
+    path: "/etc/ssl/{{ proxy_hostname }}/cert.csr"
+    privatekey_path: "/etc/ssl/{{ proxy_hostname }}/key.pem"
+    common_name: "{{ proxy_hostname }}"
+    subject_alt_name: "DNS:{{ proxy_hostname }}"
+
+- name: create certificate
+  become: yes
+  openssl_certificate:
+    path: "/etc/ssl/{{ proxy_hostname }}/cert.pem"
+    privatekey_path: "/etc/ssl/{{ proxy_hostname }}/key.pem"
+    csr_path: "/etc/ssl/{{ proxy_hostname }}/cert.csr"
+    provider: selfsigned
+
+- name: copy ssl config snippet
+  become: yes
+  template:
+    src: ssl-snippet.j2
+    dest: /etc/nginx/snippets/ssl

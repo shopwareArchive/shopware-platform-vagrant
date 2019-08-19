@@ -1,0 +1,4 @@
+---
+proxy_enabled: yes
+proxy_hostname: shopware.local
+proxy_ssl: yes
