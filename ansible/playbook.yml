@@ -1,6 +1,11 @@
 ---
 - name: apply configuration
   hosts: all
+
+  vars_files:
+    - vars/all.yml
+
   roles:
     - common
     - shopware-dev
+    - { role: nginx, when: proxy_enabled }

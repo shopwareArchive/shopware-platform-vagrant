@@ -25,12 +25,15 @@ You need VirtualBox, Vagrant (min. Version 2.0) and Git installed locally on you
 - [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 - [Vagrant](https://www.vagrantup.com/downloads.html)
 - [Git](https://git-scm.com)
+- [Vagrant Hostsupdater](https://github.com/cogitatio/vagrant-hostsupdater) (optional)
 
 The IP address `192.168.33.10` is used by the vagrant box, so it must not be in use in the network already. If this is not possible, you manually have to change the IP address in the `Vagrantfile` you'll clone in the next step.
 
 
 ## Usage
+This section explains the basic setup of the virtual machine, as well as an advanced setup, using a reverse proxy and SSL.
 
+### Basic setup
 Start by cloning this repository to your local machine
     
     $ git clone git@github.com:shopwareLabs/shopware-platform-vagrant.git
@@ -48,12 +51,30 @@ The storefront will be available at [http://192.168.33.10/](http://192.168.33.10
 
 The administration will be available at [http://192.168.33.10/admin](http://192.168.33.10/admin).
 
-Credentials for ssh access are `vagrant/vagrant`. 
+Credentials for ssh access are `vagrant/vagrant`.
 
 You connect via `vagrant ssh` or use credentials and ssh with the following command (make sure ssh known_hosts is correct):
 
     $ ssh vagrant@192.168.33.10
 
+### Advanced setup
+If you would like to access the Shopware instance using a hostname, rather than the IP address,
+you can enable the reverse proxy and - if you like - SSL encryption.
+
+Both proxy and SSL can be enabled by editing the `ansible/vars/all.yml`. In this file,
+you will find the following options and be able to modify them accordingly.
+
+| Variable       | Type             | Default               | Description                                                            |
+|----------------|------------------|-----------------------|------------------------------------------------------------------------|
+| proxy_enabled  | Boolean (yes/no) | no                    | Enables the installation of nginx as a reverse proxy                   |
+| proxy_hostname | Hostname         | "shopware.local"      | Defines the hostname that will be used to access the Shopware instance |
+| proxy_ssl      | Boolean (yes/no) | no                    | Enables SSL                                                            |
+
+Please notice that you will have to modify your hosts file or use the Vagrant Hostsupdater plugin,
+when using a reverse proxy setup.
+
+Given the hosts entry is set, you can access the Shopware instance via `https://<proxy_hostname>`, whereas
+`<proxy_hostname>` is a placeholder for the configured hostname (shopware.local per default).
 
 ---
 

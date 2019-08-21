@@ -16,14 +16,14 @@
   mysql_db:
     name: shopware
     state: present
-  
-- name: create mysql database 'shopware_test'  
+
+- name: create mysql database 'shopware_test'
   become: yes
   mysql_db:
     name: shopware_test
     state: present
 
-- name: create mysql database 'shopware_e2e'  
+- name: create mysql database 'shopware_e2e'
   become: yes
   mysql_db:
     name: shopware_e2e
@@ -58,16 +58,27 @@
     dest: "/var/www/shopware.dev"
     state: link
 
-- name: copy apache config file for shopware-dev
+- name: copy apache config files for shopware-dev
   become: yes
-  copy:
-    src: "shopware.dev.conf"
-    dest: "/etc/apache2/sites-available/shopware.dev.conf"
+  block:
+    - name: copy shopware config
+      template:
+        src: "shopware.dev.conf.j2"
+        dest: "/etc/apache2/sites-available/shopware.dev.conf"
+    - name: copy apache ports config
+      template:
+        src: "ports.conf.j2"
+        dest: "/etc/apache2/ports.conf"
+  vars:
+    apache_port: "{{ 81 if proxy_ssl else 80 }}"
 
 - name: copy .psh.yaml.override file for shopware install
-  copy:
-    src: ".psh.yaml.override"
+  template:
+    src: ".psh.yaml.override.j2"
     dest: "/home/vagrant/shopware-dev/.psh.yaml.override"
+  vars:
+    shop_host: "{{ proxy_hostname if proxy_enabled else '192.168.33.10' }}"
+    shop_protocol: "{{ 'https' if proxy_ssl else 'http' }}"
 
 - name: enable site shopware.dev.conf
   command: a2ensite shopware.dev.conf
@@ -81,6 +92,12 @@
   command: "./psh.phar install"
   args:
     chdir: /home/vagrant/shopware-dev
+
+- name: set trusted proxies
+  lineinfile:
+    path: /home/vagrant/shopware-dev/.env
+    regexp: '^#TRUSTED_PROXIES'
+    line: 'TRUSTED_PROXIES=127.0.0.1,127.0.0.2,::1'
 
 - name: change group to www-data for shopware-dev directory
   become: yes
