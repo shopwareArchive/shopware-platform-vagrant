@@ -56,3 +56,37 @@
   apt:
     pkg: apache2
     state: latest
+
+- name: change apache run user
+  become: yes
+  lineinfile:
+    dest: "/etc/apache2/envvars"
+    regexp: "^export APACHE_RUN_USER="
+    line: "export APACHE_RUN_USER=vagrant"
+    state: present
+
+- name: change apache run group
+  become: yes
+  lineinfile:
+    dest: "/etc/apache2/envvars"
+    regexp: "^export APACHE_RUN_GROUP="
+    line: "export APACHE_RUN_GROUP=vagrant"
+    state: present
+
+- name: change permissions on /var/lock/apache2
+  become: yes
+  file:
+    path: /var/lock/apache2
+    state: directory
+    recurse: yes
+    owner: vagrant
+    group: vagrant
+
+- name: change permissions on /var/log/apache2
+  become: yes
+  file:
+    path: /var/log/apache2
+    state: directory
+    recurse: yes
+    owner: vagrant
+    group: vagrant

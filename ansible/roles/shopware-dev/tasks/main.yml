@@ -99,13 +99,6 @@
     regexp: '^#TRUSTED_PROXIES'
     line: 'TRUSTED_PROXIES=127.0.0.1,127.0.0.2,::1'
 
-- name: change group to www-data for shopware-dev directory
-  become: yes
-  file:
-    path: /home/vagrant/shopware-dev
-    group: www-data
-    recurse: yes
-
 - name: enable mod_rewrite
   become: yes
   apache2_module:
