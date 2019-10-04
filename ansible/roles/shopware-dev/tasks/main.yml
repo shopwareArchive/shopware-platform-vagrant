@@ -70,7 +70,7 @@
         src: "ports.conf.j2"
         dest: "/etc/apache2/ports.conf"
   vars:
-    apache_port: "{{ 81 if proxy_ssl else 80 }}"
+    apache_port: "{{ 81 if proxy_enabled else 80 }}"
 
 - name: copy .psh.yaml.override file for shopware install
   template:
