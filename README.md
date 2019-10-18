@@ -113,4 +113,4 @@ The vagrant box fully encapsulates the whole platform with all its sources. So t
 | Host      | 192.168.33.10     |
 | User      | vagrant           |
 | Password  | vagrant           |
-| Path      | /~/shopware-dev   |
+| Path      | ~/shopware-dev    |
