@@ -5,6 +5,11 @@
     dest: /home/vagrant/shopware-dev
     clone: yes
 
+- name: delete platform folder
+  file:
+    path: /home/vagrant/shopware-dev/platform
+    state: absent
+  
 - name: clone shopware platform git repo
   git:
     repo: http://github.com/shopware/platform.git
