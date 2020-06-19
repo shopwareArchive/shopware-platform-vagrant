@@ -2,6 +2,7 @@
 - name: clone shopware-dev git repo
   git:
     repo: http://github.com/shopware/development.git
+    version: "{{ shopware_version }}"
     dest: /home/vagrant/shopware-dev
     clone: yes
 
@@ -13,6 +14,7 @@
 - name: clone shopware platform git repo
   git:
     repo: http://github.com/shopware/platform.git
+    version: "{{ shopware_version }}"
     dest: /home/vagrant/shopware-dev/platform
     clone: yes
 

@@ -57,6 +57,14 @@ You connect via `vagrant ssh` or use credentials and ssh with the following comm
 
     $ ssh vagrant@192.168.33.10
 
+### Shopware versions
+
+By editing the `ansible/vars/all.yml` file you are able to set the `shopware_version` variable. This variable references the branch
+name of the devlopment template which is used to build the vagrant VM. 
+This can be the literal string HEAD, a branch name or a tag name of this repository: https://github.com/shopware/development
+
+By default this variable is set to the `master` branch.
+
 ### Advanced setup
 If you would like to access the Shopware instance using a hostname, rather than the IP address,
 you can enable the reverse proxy and - if you like - SSL encryption.
