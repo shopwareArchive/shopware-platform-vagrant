@@ -49,7 +49,7 @@ After the process completes your virtual machine will be up an running with your
 
 The storefront will be available at [http://192.168.33.10/](http://192.168.33.10/).
 
-The administration will be available at [http://192.168.33.10/admin](http://192.168.33.10/admin).
+The administration will be available at [http://192.168.33.10/admin](http://192.168.33.10/admin). The default credentials are `admin/shopware`.
 
 Credentials for ssh access are `vagrant/vagrant`.
 
