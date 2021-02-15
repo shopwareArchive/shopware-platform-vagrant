@@ -63,7 +63,7 @@ By editing the `ansible/vars/all.yml` file you are able to set the `shopware_ver
 name of the devlopment template which is used to build the vagrant VM. 
 This can be the literal string HEAD, a branch name or a tag name of this repository: https://github.com/shopware/development
 
-By default this variable is set to the `master` branch.
+By default this variable is set to the `trunk` branch.
 To use a specific version you can set the corresponding git tag: `v6.2.2`
 
 In it's current state this setup cannot be used to update a running shopware instance via `shopware_version` variable and re-provisioning
