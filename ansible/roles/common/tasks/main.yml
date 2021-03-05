@@ -28,8 +28,26 @@
 - name: install packages required for shopware.dev setup
   become: yes
   apt: 
-    pkg: ['sudo', 'git', 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'php', 'libapache2-mod-php', 'php-cli', 'mysql-server', 'python-mysqldb', 'composer', 'nodejs', 'chromium-browser', 'default-jre-headless', 'docker.io', 'docker-compose']
+    pkg: ['sudo', 'git', 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'php', 'libapache2-mod-php', 'php-cli', 'mysql-server', 'python-mysqldb', 'nodejs', 'chromium-browser', 'default-jre-headless', 'docker.io', 'docker-compose']
     state: latest
+    
+- name: Download and install Composer
+  shell: curl -sS https://getcomposer.org/installer | php
+  args:
+    chdir: /usr/src/
+    creates: /usr/local/bin/composer
+    warn: false
+  become: yes
+  
+- name: Add Composer to global path
+  copy: 
+    dest: /usr/local/bin/composer
+    group: root
+    mode: '0755'
+    owner: root
+    src: /usr/src/composer.phar
+    remote_src: yes
+  become: yes
 
 - name: install php extensions
   become: yes
