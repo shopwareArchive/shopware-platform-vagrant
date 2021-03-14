@@ -1,3 +1,18 @@
+# DEPRECATED
+
+This repository is no longer maintained and therefor deprecated.
+
+Please consider using [dockware.io](https://dockware.io/getstarted) if you want to setup a development environment for Shopware.
+This also works great with Windows (including WSL2).
+
+Feel free to use this repository as a baseline for setting up your own Shopware development environment with Vagrant and Ansible but keep in mind that it might be an old baseline.
+
+Thank you for your understanding!
+
+
+---
+
+
 Shopware Development build with Vagrant
 =======================================
 
